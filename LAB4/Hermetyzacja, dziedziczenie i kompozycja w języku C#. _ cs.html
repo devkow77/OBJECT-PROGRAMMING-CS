@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://cs.lazysolutions.pl/instructions/lab4-2025.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Hermetyzacja, dziedziczenie i kompozycja w języku C#. | cs</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Hermetyzacja, dziedziczenie i kompozycja w języku C#.">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://cs.lazysolutions.pl/instructions/lab4-2025.html">
+<meta property="og:url" content="https://cs.lazysolutions.pl/instructions/lab4-2025.html">
+<meta property="og:site_name" content="cs">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Hermetyzacja, dziedziczenie i kompozycja w języku C#.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Hermetyzacja, dziedziczenie i kompozycja w języku C#.","url":"https://cs.lazysolutions.pl/instructions/lab4-2025.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <style class="anchorjs"></style><link rel="stylesheet" href="./Hermetyzacja, dziedziczenie i kompozycja w języku C#. _ cs_files/style.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  <link id="chromealerabat-link" rel="stylesheet" type="text/css" href="chrome-extension://dacdinoicboceafielngnmjjplncljhj/content.css"><style type="text/css"></style><style type="text/css">.pixelParallel-panel[data-v-dedc8274]{position:fixed;right:10px;bottom:10px;z-index:2147483647;width:375px;height:265px;transform:translate(0);background:#fff;transition:width .2s ease-out,height .2s ease-out;will-change:top,left,width,height,transform;opacity:0}.pixelParallel-panel-inner[data-v-dedc8274]{position:relative;overflow:hidden;height:100%;border:1px solid #dddedf;box-shadow:0 2px 10px rgba(0,0,0,.1);box-sizing:border-box}.pixelParallel-panel-handle[data-v-dedc8274]{position:absolute;top:-10px;right:-10px;z-index:3;width:20px;height:20px;background:red;transform:rotate(45deg);background:linear-gradient(0deg,transparent,transparent 50%,#ccc 0,#ccc);background-size:100% 2px;cursor:move}.pixelParallel-panel-isolator[data-v-dedc8274]{border:0;width:100%;height:100%;overflow:hidden;position:relative}.pixelParallel-panel-dragging .pixelParallel-panel-inner[data-v-dedc8274]{pointer-events:none}.pixelParallel-panel-minimized[data-v-dedc8274]{width:112px;height:50px;transition:width .2s ease-out .15s,height .2s ease-out .15s}@media (max-width:395px){.pixelParallel-panel[data-v-dedc8274]{right:0;bottom:0;width:320px}.pixelParallel-panel-minimized[data-v-dedc8274]{width:112px}}</style><style type="text/css">.pixelParallel-overlay{position:absolute;left:0;top:0;width:100%;text-align:center;white-space:nowrap;display:none}.pixelParallel-overlay-enabled{display:block}</style><style type="text/css">.pixelParallel-image-outer{visibility:hidden;position:absolute;top:0;left:0;width:100%;overflow:hidden;max-width:100vw;min-height:100vh}.pixelParallel-image-inner{position:absolute;z-index:2147483646;left:50%;top:0;cursor:move;transform:translateX(-50%);transition:opacity .15s}.pixelParallel-image-inner img{width:auto;height:auto;max-width:none;max-height:none;vertical-align:top;margin:0;padding:0;position:relative;transform-origin:50% 0;top:-1px;border:1px dashed #333}.pixelParallel-image-inner img:not([src]),.pixelParallel-image-inner img[src=""]{visibility:hidden}.pixelParallel-image-enabled{visibility:visible}.pixelParallel-image-difference{mix-blend-mode:difference}.pixelParallel-image-difference img{opacity:1!important}.pixelParallel-image-locked,.pixelParallel-image-no-image{pointer-events:none}.pixelParallel-image-locked .pixelParallel-image-inner img{top:0;border:0 none}</style><style type="text/css">.pixelParallel-grids{position:relative;z-index:2147483646;pointer-events:none}.pixelParallel-grid-horizontal,.pixelParallel-grid-vertical{position:fixed;z-index:1;pointer-events:none;visibility:hidden}.pixelParallel-grid-horizontal{top:50%;left:50%;display:table;width:100vw;height:200vh;opacity:.5;table-layout:fixed;border-spacing:30px;transform:translate(-50%,-50%)}.pixelParallel-grid-horizontal span{display:table-cell;background:red;height:200vh}.pixelParallel-grid-vertical{top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,transparent,transparent 90%,blue 0,blue);background-size:100% 10px;opacity:.5}.pixelParallel-grid-horizontal-enabled,.pixelParallel-grid-vertical-enabled{visibility:visible}</style><style type="text/css">.pixelParallel-rulers{position:relative;z-index:2147483646}.pixelParallel-ruler-x,.pixelParallel-ruler-y{display:none;position:fixed;top:0;left:0;z-index:2;background:cyan}.pixelParallel-ruler-x:after,.pixelParallel-ruler-y:after{content:"";position:absolute;top:-8px;left:-8px;right:0;bottom:0;padding:10px}.pixelParallel-ruler-x{right:0;height:1px;cursor:row-resize}.pixelParallel-ruler-y{bottom:0;width:1px;cursor:col-resize}.pixelParallel-rulers-enabled .pixelParallel-ruler-x,.pixelParallel-rulers-enabled .pixelParallel-ruler-y{display:block}</style></head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://cs.lazysolutions.pl/">cs</a></h1>
+      
+
+      <h1 id="hermetyzacja-dziedziczenie-i-kompozycja-w-języku-c">Hermetyzacja, dziedziczenie i kompozycja w języku C#.</h1>
+
+<h2 id="dziedziczenie">Dziedziczenie<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#dziedziczenie" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<p><mark>Dziedziczenie wyraża relację "jest" (ang. is a).</mark></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Publication</span> <span class="p">{</span> <span class="p">}</span>  
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Book</span> <span class="p">:</span> <span class="n">Publication</span> <span class="p">{</span> <span class="p">}</span>  <span class="c1">// Book "jest" publikacją</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Magazine</span> <span class="p">:</span> <span class="n">Publication</span> <span class="p">{</span> <span class="p">}</span>  <span class="c1">// Magazine "jest" publikacją</span>
+</code></pre></div></div>
+
+<p><mark> Interfejsy wyraża relacja "może zrobić" (can do - pozwalają określić funkcjonalność, bez wymuszania dziedziczenia.)</mark></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IPrintable</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Print</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Book</span> <span class="p">:</span> <span class="n">IPrintable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Print</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Drukowanie książki..."</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Zapoznaj się z <a href="https://learn.microsoft.com/pl-pl/dotnet/csharp/fundamentals/tutorials/inheritance">artykułem</a> a następnie opisz czym jest <strong>dziedziczenie</strong>:</p>
+
+<textarea id="extends" rows="10" cols="50" placeholder="Dziedziczenie - ..."></textarea>
+
+<p>Wymień elementy niedziedziczone przez klasy pochodne oraz je scharakteryzuj (kiedy są wywoływane, do czego służą <mark>szczególnie konstruktory startczne</mark>):</p>
+
+<ul>
+  <li>
+    <p><input id="a"> - <textarea id="d"> </textarea></p>
+  </li>
+  <li>
+    <p><input id="b"> - <textarea id="e"> </textarea></p>
+  </li>
+  <li>
+    <p><input id="c"> - <textarea id="f"> </textarea></p>
+  </li>
+</ul>
+
+<p>W języku C# klasa może dziedziczyć po <input type="number"> klasie/klasach oraz implementować <input> interfejsów.</p>
+
+<h2 id="hermetyzacja-enkapsulacja-w-kontekście-dziedziczenia">Hermetyzacja (enkapsulacja) w kontekście dziedziczenia<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#hermetyzacja-enkapsulacja-w-kontek%C5%9Bcie-dziedziczenia" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<p>Podaj przykłady kodu obrazujące zakres działania modyfikatorów dostępu.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">private</code></strong> - <textarea id="g"></textarea></p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">protected</code></strong> - <textarea id="h"></textarea></p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">internal</code></strong> - <textarea id="i"></textarea></p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">public</code></strong> - <textarea id="j"></textarea></p>
+
+<p>Wymień metody/pola niejawnie dziedziczone z typu Object:</p>
+
+<ol>
+  <li>
+    <p><input id="k"> - <textarea id="t"></textarea></p>
+  </li>
+  <li>
+    <p><input id="l"> - <textarea id="u"></textarea></p>
+  </li>
+  <li>
+    <p><input id="m"> - <textarea id="w"></textarea></p>
+  </li>
+  <li>
+    <p><input id="n"> - <textarea id="x"></textarea></p>
+  </li>
+  <li>
+    <p><input id="o"> - <textarea id="y"></textarea></p>
+  </li>
+  <li>
+    <p><input id="p"> -  <textarea id="z"></textarea></p>
+  </li>
+  <li>
+    <p><input id="r"> - <textarea id="aa"></textarea></p>
+  </li>
+  <li>
+    <p><input id="s"> - <textarea id="ab"></textarea></p>
+  </li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">class</code> zawsze dziecziczy po <code class="language-plaintext highlighter-rouge">Object</code> jednak istnieją również inne typy które dziedziczą niejawnie po konkretnych klasach. Wymień klasy po których dziedziczą następujące typy:</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">struct</code></strong> - <input id="ac"></p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">enum</code></strong> - <input id="ad"> 
+<strong><code class="language-plaintext highlighter-rouge">delegate</code></strong> - <input id="ae"></p>
+
+<h2 id="składnia">Składnia<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#sk%C5%82adnia" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<p>Dziedziczenie w C# to mechanizm, który pozwala tworzyć nowe klasy na podstawie już 
+istniejących. Klasa pochodna (<code class="language-plaintext highlighter-rouge">Pochodna</code>) może dziedziczyć po klasie bazowej (<code class="language-plaintext highlighter-rouge">Bazowa</code>),
+ co oznacza, że automatycznie przejmuje jej pola i metody. Aby wskazać dziedziczenie,
+  używa się dwukropka (<code class="language-plaintext highlighter-rouge">:</code>), np. <code class="language-plaintext highlighter-rouge">class Pochodna : Bazowa { }</code>. Dzięki temu można rozszerzać 
+  funkcjonalność klasy bazowej bez konieczności przepisywania kodu.</p>
+
+<p>Jeśli klasa bazowa posiada konstruktor, klasa pochodna może go wywołać, używając słowa 
+kluczowego <code class="language-plaintext highlighter-rouge">base(...)</code>. Jest to szczególnie przydatne, gdy klasa bazowa wymaga przekazania 
+parametrów podczas tworzenia obiektu. Wywołanie konstruktora klasy bazowej odbywa się w 
+sekcji inicjalizacyjnej konstruktora klasy pochodnej, np.:
+<code class="language-plaintext highlighter-rouge">public Pochodna(string nazwa) : base(nazwa) { }</code>.</p>
+
+<p>Metody w klasach mogą być oznaczone jako <code class="language-plaintext highlighter-rouge">virtual</code>, co oznacza, że mogą być nadpisane 
+ w klasie pochodnej. Dzięki temu można zmienić działanie metody bazowej, 
+dostosowując je do specyficznych potrzeb klasy pochodnej. Aby to zrobić, w klasie 
+pochodnej należy użyć słowa kluczowego <code class="language-plaintext highlighter-rouge">override</code>, np.: <code class="language-plaintext highlighter-rouge">public override void PrzedstawSie()</code></p>
+
+<p>Jeśli klasa bazowa ma charakter ogólny i nie powinna być bezpośrednio instancjonowana, 
+można oznaczyć ją jako <code class="language-plaintext highlighter-rouge">abstract</code>. Klasa abstrakcyjna (<code class="language-plaintext highlighter-rouge">abstract class</code>) może zawierać 
+metody abstrakcyjne, które nie mają implementacji – ich treść musi być określona w 
+klasach pochodnych. To wymusza na programiście zdefiniowanie konkretnej logiki w klasie 
+dziedziczące np. <code class="language-plaintext highlighter-rouge">public abstract void SpecjalnaFunkcja();</code></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+
+<span class="c1">// Klasa abstrakcyjna - nie można tworzyć jej instancji</span>
+<span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">Bazowa</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Nazwa</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// Właściwość tylko do odczytu</span>
+
+    <span class="c1">// Konstruktor klasy bazowej</span>
+    <span class="k">public</span> <span class="nf">Bazowa</span><span class="p">(</span><span class="kt">string</span> <span class="n">nazwa</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Nazwa</span> <span class="p">=</span> <span class="n">nazwa</span><span class="p">;</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Konstruktor klasy Bazowa"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Metoda wirtualna, którą można nadpisać w klasie pochodnej</span>
+    <span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="nf">PrzedstawSie</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Jestem </span><span class="p">{</span><span class="n">Nazwa</span><span class="p">}</span><span class="s">, klasa bazowa."</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Metoda abstrakcyjna – musi być zaimplementowana w klasie pochodnej</span>
+    <span class="k">public</span> <span class="k">abstract</span> <span class="k">void</span> <span class="nf">SpecjalnaFunkcja</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Klasa pochodna dziedziczy po klasie Bazowa</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Pochodna</span> <span class="p">:</span> <span class="n">Bazowa</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Typ</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">// Konstruktor klasy pochodnej wywołuje konstruktor klasy bazowej</span>
+    <span class="k">public</span> <span class="nf">Pochodna</span><span class="p">(</span><span class="kt">string</span> <span class="n">nazwa</span><span class="p">,</span> <span class="kt">string</span> <span class="n">typ</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">nazwa</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Typ</span> <span class="p">=</span> <span class="n">typ</span><span class="p">;</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Konstruktor klasy Pochodna"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Nadpisanie metody wirtualnej z klasy bazowej</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">PrzedstawSie</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Jestem </span><span class="p">{</span><span class="n">Nazwa</span><span class="p">}</span><span class="s">, klasa pochodna typu </span><span class="p">{</span><span class="n">Typ</span><span class="p">}</span><span class="s">."</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Implementacja metody abstrakcyjnej</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">SpecjalnaFunkcja</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Specjalna funkcja dla </span><span class="p">{</span><span class="n">Typ</span><span class="p">}</span><span class="s">!"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Program</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Tworzenie obiektu klasy pochodnej</span>
+        <span class="n">Pochodna</span> <span class="n">obiekt</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Pochodna</span><span class="p">(</span><span class="s">"Obiekt1"</span><span class="p">,</span> <span class="s">"SpecjalnyTyp"</span><span class="p">);</span>
+
+        <span class="c1">// Wywołanie metod</span>
+        <span class="n">obiekt</span><span class="p">.</span><span class="nf">PrzedstawSie</span><span class="p">();</span>  <span class="c1">// Nadpisana metoda</span>
+        <span class="n">obiekt</span><span class="p">.</span><span class="nf">SpecjalnaFunkcja</span><span class="p">();</span>  <span class="c1">// Implementacja metody abstrakcyjnej</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="zadania">Zadania<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#zadania" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="zadanie-1">Zadanie 1<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#zadanie-1" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<blockquote>
+  <p>Zaprojektuj klasę bazową Employee, która będzie reprezentować ogólnego pracownika. Klasa ta powinna zawierać właściwości: Name (string) - imię pracownika oraz Salary (decimal) - podstawową pensję pracownika. Następnie dodaj konstruktor, który przyjmuje jako parametry imię i pensję, i inicjalizuje odpowiednie właściwości. W klasie tej powinna znaleźć się także metoda DisplayInfo(), która wyświetli informacje o pracowniku (imię i pensję) w konsoli. Kolejnym elementem jest metoda wirtualna CalculateBonus(), która oblicza bonus pracownika. Domyślnie może ona zwracać 0, ale będzie nadpisywana w klasach pochodnych.</p>
+</blockquote>
+
+<h3 id="zadanie-2">Zadanie 2<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#zadanie-2" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<blockquote>
+  <p>Stworzyć dwie klasy pochodne, które będą dziedziczyć po klasie Employee. Pierwsza z nich, Manager, powinna posiadać dodatkową właściwość TeamSize (int), która będzie przechowywać liczbę osób w zespole, którym zarządza menedżer. W klasie tej należy nadpisać metodę <code class="language-plaintext highlighter-rouge">CalculateBonus()</code>, aby menedżer otrzymywał 20% swojej pensji jako bonus. Dodatkowo należy nadpisać metodę <code class="language-plaintext highlighter-rouge">DisplayInfo()</code>, aby oprócz imienia i pensji wyświetlała także liczbę osób w zespole menedżera. Druga klasa, <code class="language-plaintext highlighter-rouge">Developer</code>, powinna zawierać właściwość <code class="language-plaintext highlighter-rouge">ProgrammingLanguage</code> (string), która będzie przechowywać główny język programowania, w którym specjalizuje się programista. W tej klasie również należy nadpisać metodę <code class="language-plaintext highlighter-rouge">CalculateBonus()</code>, aby programista otrzymywał 10% swojej pensji jako bonus. Metodę <code class="language-plaintext highlighter-rouge">DisplayInfo()</code> także należy nadpisać, aby wyświetlała informacje o języku programowania.</p>
+</blockquote>
+
+<h3 id="zadanie-3">Zadanie 3<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#zadanie-3" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<blockquote>
+  <p>Aby lepiej zorganizować kod, przekształć klasę Employee w klasę pochodną, dziedziczącą po klasie abstrakcyjnej Person. Klasa Person powinna zawierać właściwość Name (string) - imię osoby, konstruktor inicjujący to imię oraz metodę abstrakcyjną DisplayInfo(), którą każda klasa pochodna musi zaimplementować. Klasa Employee powinna teraz dziedziczyć po klasie Person i implementować metodę DisplayInfo().</p>
+</blockquote>
+
+<h3 id="zadanie-4">Zadanie 4<a class="anchorjs-link " href="https://cs.lazysolutions.pl/instructions/lab4-2025.html#zadanie-4" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<blockquote>
+  <p>W metodzie <code class="language-plaintext highlighter-rouge">Main()</code> utwórz obiekty obu klas pochodnych (<code class="language-plaintext highlighter-rouge">Manager</code> i <code class="language-plaintext highlighter-rouge">Developer</code>) i wykonaj następujące operacje. Wywołaj metodę DisplayInfo() dla każdego z pracowników, aby wyświetlić pełne informacje (imię, pensja, dodatkowe dane specyficzne dla danego typu pracownika). Wywołaj metodę <code class="language-plaintext highlighter-rouge">CalculateBonus()</code>, aby obliczyć i wyświetlić bonus dla każdego z pracowników.</p>
+</blockquote>
+
+<details>
+  <p>W klasie pochodnej, aby wywołać konstruktor klasy bazowej, użyj słowa kluczowego <code class="language-plaintext highlighter-rouge">base(...)</code>. Używaj modyfikatorów  <code class="language-plaintext highlighter-rouge">virtual</code> i <code class="language-plaintext highlighter-rouge">override</code>, aby nadpisać metody w klasach pochodnych. Klasa abstrakcyjna Person wymusza zaimplementowanie metod, które nie mają domyślnych implementacji. Dobrze przemyśl, w jaki sposób struktura klas abstrakcyjnych i pochodnych wpływa na rozszerzalność Twojego programu.</p>
+</details>
+
+<script>
+        function saveToLocalStorage(event) {
+            const element = event.target;
+            if (element.id) {  // Only save elements with an ID
+                localStorage.setItem(element.id, element.value);
+            }
+        }
+
+        function loadFromLocalStorage() {
+            document.querySelectorAll("input, textarea").forEach(element => {
+                if (element.id && localStorage.getItem(element.id)) {
+                    element.value = localStorage.getItem(element.id);
+                }
+                element.addEventListener("input", saveToLocalStorage);
+            });
+        }
+
+        window.addEventListener("DOMContentLoaded", loadFromLocalStorage);
+    </script>
+
+
+
+      
+    </div>
+    <script src="./Hermetyzacja, dziedziczenie i kompozycja w języku C#. _ cs_files/anchor.min.js.pobrane" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  
+
+</body></html>

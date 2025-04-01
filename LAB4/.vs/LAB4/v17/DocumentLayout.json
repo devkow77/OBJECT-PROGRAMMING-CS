@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\KACPER KOWALSKI\\STUDIA\\II ROK\\II SEMESTR\\PO - PROGRAMOWANIE OBIEKTOWE (C#)\\LAB4\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{95F3DD96-FB80-4B4F-B534-8167FA8D05CF}|LAB4.csproj|d:\\kacper kowalski\\studia\\ii rok\\ii semestr\\po - programowanie obiektowe (c#)\\lab4\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95F3DD96-FB80-4B4F-B534-8167FA8D05CF}|LAB4.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\KACPER KOWALSKI\\STUDIA\\II ROK\\II SEMESTR\\PO - PROGRAMOWANIE OBIEKTOWE (C#)\\LAB4\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\KACPER KOWALSKI\\STUDIA\\II ROK\\II SEMESTR\\PO - PROGRAMOWANIE OBIEKTOWE (C#)\\LAB4\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAA4BAAAAAAAAAAAIwCMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T20:31:47.109Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
