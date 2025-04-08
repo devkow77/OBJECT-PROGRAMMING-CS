@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Obsługa wyjątków w języku C#. | cs</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Obsługa wyjątków w języku C#.">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://cs.lazysolutions.pl/instructions/lab6-2025.html">
+<meta property="og:url" content="https://cs.lazysolutions.pl/instructions/lab6-2025.html">
+<meta property="og:site_name" content="cs">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Obsługa wyjątków w języku C#.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Obsługa wyjątków w języku C#.","url":"https://cs.lazysolutions.pl/instructions/lab6-2025.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <style class="anchorjs"></style><link rel="stylesheet" href="Obs%C5%82uga%20wyj%C4%85tk%C3%B3w%20w%20j%C4%99zyku%20C%23.%20_%20cs_pliki/style.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://cs.lazysolutions.pl/">cs</a></h1>
+      
+
+      <h1 id="obsługa-wyjątków-w-języku-c">Obsługa wyjątków w języku C#.</h1>
+
+<p>W języku C# wyjątki (exceptions) to mechanizm obsługi błędów, który 
+pozwala reagować na nieoczekiwane sytuacje w czasie wykonywania 
+programu.</p>
+
+<p>Opisz jakie zadanie pełnią następujące słówka kluczowe w języku c#:</p>
+
+<p><code class="language-plaintext highlighter-rouge">try</code> - <input id="try" value="Odpowiada za próbe wykonania kodu w tym bloku"></p>
+
+<p><code class="language-plaintext highlighter-rouge">catch</code> - <input id="catch" value="Jeżeli kod w bloku try z jakich kolwiek przyczyn się nie wykona wtedy przechodzi do bloku catch który wyłapuje wyjątki błędów"></p>
+
+<p><code class="language-plaintext highlighter-rouge">finally</code> - <input id="finally" value="blok kodu który zawsze się wykona bez względu czy wystąpi błąd czy nie"></p>
+
+<p>Które z tych bloków możemy pominąć? Które są wymagane?</p>
+
+<p>Jeśli musimy wywołać fragment kodu po wystąpieniu wyjątku aby np. 
+przywrócić hermetycznosć klasy ale nie chcemy przechwytywać wyjątku, z 
+jakich bloków skorzystamy? Podaj przkład kodu.</p>
+
+<textarea id="try-finally" cols="80"></textarea>
+
+<h2 id="zgłaszanie-wyjątków">Zgłaszanie wyjątków<a class="anchorjs-link " href="#zgłaszanie-wyjątków" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<p>Większość wyjątków w C# dziedziczy po klasie <a href="https://learn.microsoft.com/pl-pl/dotnet/api/system.exception?view=net-8.0"><code class="language-plaintext highlighter-rouge">Exception</code></a>. Wyjątki wystemowe dziedziczą po  <a href="https://learn.microsoft.com/pl-pl/dotnet/api/system.systemexception?view=net-8.0"><code class="language-plaintext highlighter-rouge">SystemException</code></a>. Aby zgłosić wyjątek w trakcie działania programu używamy słówka <code class="language-plaintext highlighter-rouge">throw</code>, następnie tworzymy obiekt wyjątku który chcemy zwrócić.</p>
+
+<p>Znajdź klasy odpowiadające za zgłaszanie następujących oraz podaj przykłady kodu kiedy dany wyjątek występuje:</p>
+
+<p>Nieprawidłowy argument metody - <input id="argumentexception" value="InvalidDataException"></p>
+<textarea id="code-argument-exception" cols="80" style="width: 750px; height: 659px;"> using System;
+using System.IO;
+ 
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            ProcessData("invalid");
+        }
+        catch (InvalidDataException ex)
+        {
+            Console.WriteLine($"Błąd: {ex.Message}");
+        }
+    }
+ 
+    static void ProcessData(string data)
+    {
+        if (data == "invalid")
+        {
+            throw new InvalidDataException("Dane wejściowe są niepoprawne!");
+        }
+ 
+        Console.WriteLine("Dane są poprawne.");
+    }
+}</textarea>
+
+<p>Przekazano null, ale wymagano wartości - <input id="ArgumentNullException" value="ArgumentNullException"></p>
+<textarea id="code-ArgumentNullException" cols="80" style="width: 732px; height: 202px;">int addMethod(int x, int y)
+{
+    if (x == null || y == null){
+        throw new ArgumentNullException("Argument nie powinien być nullem!");
+    }
+
+    return x + y
+}</textarea>
+
+<p>Wartość argumentu poza zakresem - <input id="ArgumentOutOfRangeException" value="ArgumentOutOfRangeException"></p>
+<textarea id="code-ArgumentOutOfRangeException" cols="80" style="width: 725px; height: 978px;">using System;
+using static System.Console;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        try
+        {
+            var guest1 = new Guest("Ben", "Miller", 17);
+            WriteLine(guest1.GuestInfo);
+        }
+        catch (ArgumentOutOfRangeException argumentOutOfRangeException)
+        {
+            WriteLine($"Error: {argumentOutOfRangeException.Message}");
+        }
+    }
+}
+
+class Guest
+{
+    private const int minimumRequiredAge = 21;
+
+    private string firstName;
+    private string lastName;
+    private int age;
+
+    public Guest(string firstName, string lastName, int age)
+    {
+        if (age &lt; minimumRequiredAge)
+            throw new ArgumentOutOfRangeException(nameof(age), $"All guests must be {minimumRequiredAge}-years-old or older.");
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    public string GuestInfo =&gt; $"{firstName} {lastName}, {age}";
+}</textarea>
+
+<p>Operacja niewłaściwa dla bieżącego stanu obiektu - <input id="InvalidOperationException" value="InvalidOperationException"></p>
+<textarea id="code-InvalidOperationException" cols="80" style="width: 740px; height: 256px;"> Queue&lt;int&gt; numbers = new Queue&lt;int&gt;();
+
+int DequeueNumber()
+{
+    if (numbers.Count == 0)
+    {
+        throw new InvalidOperationException("Cannot dequeue from an empty queue.");
+    }
+    return numbers.Dequeue();
+}
+
+</textarea>
+
+<p>Odwołanie do obiektu, który ma wartość null - <input id="NullReferenceException" value="NullReferenceException"></p>
+<textarea id="code-NullReferenceException" cols="80" style="width: 723px; height: 531px;"> using System;
+ 
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            PrintMessage(null);
+        }
+        catch (NullReferenceException ex)
+        {
+            Console.WriteLine($"Błąd: {ex.Message}");
+        }
+    }
+ 
+    static void PrintMessage(string message)
+    {
+        Console.WriteLine(message.ToUpper()); // Jeśli message jest null, wyrzuci wyjątek
+    }
+}</textarea>
+
+<p>Przekroczenie zakresu tablicy - <input id="IndexOutOfRangeException" value="OverflowException"></p>
+<textarea id="code-IndexOutOfRangeException" cols="80" style="width: 776px; height: 324px;">class Program
+{
+    static void Main()
+    {
+        try
+        {
+            int[] tab = new int[2];
+	    tab[0] = 1;
+	    tab[1] = 2;
+            tab[2] = 3;
+       }
+	catch(OverflowException){
+		Console.WriteLine("Overflow Exception!");
+	}
+    }
+}</textarea>
+
+<p>Dzielenie przez zero - <input id="DivideByZeroException" value="DivideByZeroException"></p>
+<textarea id="code-DivideByZeroException" cols="80" style="width: 743px; height: 373px;"> using System;
+
+public class Example
+{
+   public static void Main()
+   {
+      int number1 = 3000;
+      int number2 = 0;
+      try {
+         Console.WriteLine(number1 / number2);
+      }
+      catch (DivideByZeroException) {
+         Console.WriteLine("Division of {0} by zero.", number1);
+      }
+   }</textarea>
+
+<p>Błędy we/wy, np. brak dostępu do pliku - <input id="IOException" value="IOException"></p>
+<textarea id="code-IOException" cols="80" style="width: 760px; height: 425px;">using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            File.Open("C:\\nope.txt", FileMode.Open);
+        }
+        catch (IOException)
+        {
+            Console.WriteLine("IO");
+        }
+    }
+}</textarea>
+
+<p>Plik nie został znaleziony - <input id="FileNotFoundException" value="FileNotFoundException"></p>
+<textarea id="code-FileNotFoundException" cols="80" style="width: 771px; height: 535px;"> using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Read in nonexistent file.
+            using (StreamReader reader = new StreamReader("not-there.txt"))
+            {
+                reader.ReadToEnd();
+            }
+        }
+        catch (FileNotFoundException ex)
+        {
+            // Write error.
+            Console.WriteLine(ex);
+        }
+    }
+}</textarea>
+
+<p>Brak uprawnień do operacji - <input id="UnauthorizedAccessException" value="UnauthorizedAccessException"></p>
+<textarea id="code-UnauthorizedAccessException" cols="80" style="width: 772px; height: 514px;"> using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Part 1: try to write a file at a path that cannot be written.
+            using (StreamWriter writer = new StreamWriter(@"C:\Windows\notepad.exe"))
+            {
+            }
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            // Part 2: catch and print the error.
+            Console.WriteLine(ex);
+        }
+    }
+}</textarea>
+
+<p>Przepełnienie stosu - <input id="StackOverflowException" value="StackOverflowException"></p>
+<textarea id="code-StackOverflowException" cols="80" style="width: 755px; height: 518px;"> using System;
+ 
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            RecursiveFunction();
+        }
+        catch (StackOverflowException) 
+        {
+            Console.WriteLine("Wystąpił StackOverflowException!");
+        }
+    }
+ 
+    static void RecursiveFunction()
+    {
+        RecursiveFunction(); // Rekurencja bez końca
+    }
+}</textarea>
+
+<p>Dzielenie przez zero - <input id="DivideByZeroException" value="DivideByZeroException"></p>
+<textarea id="code-DivideByZeroException" cols="80" style="width: 759px; height: 368px;"> using System;
+
+public class Example
+{
+   public static void Main()
+   {
+      int number1 = 3000;
+      int number2 = 0;
+      try {
+         Console.WriteLine(number1 / number2);
+      }
+      catch (DivideByZeroException) {
+         Console.WriteLine("Division of {0} by zero.", number1);
+      }
+   }</textarea>
+
+<p>Dzielenie przez zero - <input id="DivideByZeroException" value="DivideByZeroException"></p>
+<textarea id="code-DivideByZeroException" cols="80" style="width: 747px; height: 373px;"> using System;
+
+public class Example
+{
+   public static void Main()
+   {
+      int number1 = 3000;
+      int number2 = 0;
+      try {
+         Console.WriteLine(number1 / number2);
+      }
+      catch (DivideByZeroException) {
+         Console.WriteLine("Division of {0} by zero.", number1);
+      }
+   }</textarea>
+
+<p>Dzielenie przez zero - <input id="DivideByZeroException" value="DivideByZeroException"></p>
+<textarea id="code-DivideByZeroException" cols="80" style="width: 784px; height: 375px;"> using System;
+
+public class Example
+{
+   public static void Main()
+   {
+      int number1 = 3000;
+      int number2 = 0;
+      try {
+         Console.WriteLine(number1 / number2);
+      }
+      catch (DivideByZeroException) {
+         Console.WriteLine("Division of {0} by zero.", number1);
+      }
+   }</textarea>
+
+<h2 id="tworzenie-wyjątków">Tworzenie wyjątków<a class="anchorjs-link " href="#tworzenie-wyjątków" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<p>Kiedy standardowe wyjątki (np. ArgumentException, 
+InvalidOperationException) nie pasują do sytuacji, kiedy chcemy 
+przekazać dodatkowe dane w wyjątku, gdy chcemy zachować jednolity sposób
+ obsługi błędów w aplikacji c# umożliwia tworzenie własnych wyjątków.</p>
+
+<p>Aby stworzyć własny wyjątek w C#, należy utworzyć klasę, która 
+dziedziczy po Exception lub jednej z jej pochodnych (np. 
+ApplicationException).</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MyCustomException</span> <span class="p">:</span> <span class="n">Exception</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">MyCustomException</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">MyCustomException</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">MyCustomException</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">,</span> <span class="n">Exception</span> <span class="n">innerException</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">innerException</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="wybrane-właściwości-klasy-wyjątków-ang-properties">Wybrane właściwości klasy wyjątków (ang. properties)<a class="anchorjs-link " href="#wybrane-właściwości-klasy-wyjątków-ang-properties" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<blockquote>
+  <p>Zainicjalizuj blok <code class="language-plaintext highlighter-rouge">try</code> w którym wyrzucisz wyjątek. Następnie  w bloku catch
+spróbuj wypisać co zawierają poszczeólne właściwości wyrzuconego obiektu. Następnie 
+opisz co przechowują poszczególne właściwości.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">Message</code> - <input id="message" value="komunikat błędu"></p>
+
+<p><code class="language-plaintext highlighter-rouge">StackTrace</code> - <input id="stackTrace"></p>
+
+<p><code class="language-plaintext highlighter-rouge">InnerException</code> - <input id="InnerException"></p>
+
+<details>
+
+  <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span>
+<span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentNullException</span><span class="p">(</span><span class="s">"parametr"</span><span class="p">,</span> <span class="s">"Parametr nie może być null."</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">ArgumentNullException</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidOperationException</span><span class="p">(</span><span class="s">"Błąd w operacji biznesowej."</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"=== Ścieżka błędu ==="</span><span class="p">);</span>
+    <span class="n">Exception</span> <span class="n">currentEx</span> <span class="p">=</span> <span class="n">ex</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">currentEx</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Wyjątek: </span><span class="p">{</span><span class="n">currentEx</span><span class="p">.</span><span class="nf">GetType</span><span class="p">()}</span><span class="s"> - </span><span class="p">{</span><span class="n">currentEx</span><span class="p">.</span><span class="n">Message</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">currentEx</span> <span class="p">=</span> <span class="n">currentEx</span><span class="p">.</span><span class="n">InnerException</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+
+</details>
+
+<p><code class="language-plaintext highlighter-rouge">Source</code> - <input id="Source"></p>
+
+<p><code class="language-plaintext highlighter-rouge">HResult</code> -  <input id="HResult"></p>
+
+<h3 id="wybrane-metody-wyjątków">Wybrane metody wyjątków<a class="anchorjs-link " href="#wybrane-metody-wyjątków" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p>Podobnie jak poprzednio utwórz kod który zawsze wyrzuca wyjątek a w 
+bloku obsługującym go wywołaj poniższe metody. Następnie sporządź opis 
+co robią podane metody.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ToString()</code> - <input id="e-ToString()"></p>
+
+<p><code class="language-plaintext highlighter-rouge">GetType()</code> - <input id="e-GetType()"></p>
+
+<p><code class="language-plaintext highlighter-rouge">GetBaseException()</code> - <input id="e-GetBaseException()"></p>
+
+<p><code class="language-plaintext highlighter-rouge">Equals(object obj)</code> - <input id="e-Equals(object obj)"></p>
+
+<p><code class="language-plaintext highlighter-rouge">GetHashCode()</code> - <input id="e-GetHashCode()"></p>
+
+<h2 id="obsługa-wyjątków">Obsługa wyjątków<a class="anchorjs-link " href="#obsługa-wyjątków" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="obsługa-wielu-wyjątków">Obsługa wielu wyjątków<a class="anchorjs-link " href="#obsługa-wielu-wyjątków" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p>Jeśli dany fragment programu może zwrócić różne wyjątki możliwe jest wielokrotne użycie bloku <code class="language-plaintext highlighter-rouge">catch</code> aby przechwycić różne typy wyjątków:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="p">[]</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">3</span><span class="p">];</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="m">5</span><span class="p">]);</span> <span class="c1">// IndexOutOfRangeException</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="n">IndexOutOfRangeException</span> <span class="n">ex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Błąd indeksu: </span><span class="p">{</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Inny błąd: </span><span class="p">{</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Jeśli chcemy obsłużyć wyjątków w ten sam sposób/w jednym bloku od C# 8.0 jest to możliwe
+w poniższy sposób:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">catch</span> <span class="p">(</span><span class="n">ArgumentException</span> <span class="n">or</span> <span class="n">FormatException</span> <span class="n">ex</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Błąd argumentu lub formatu."</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="filtrowanie-wyjątków">Filtrowanie wyjątków<a class="anchorjs-link " href="#filtrowanie-wyjątków" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p>Wyjątki możemy również filtrować - np. obsługiwać dany wyjątek jeśli wiadomosć zawiera podany teskt. Używając słowa kluczowego <code class="language-plaintext highlighter-rouge">when</code>, możemy dodać dodatkowe warunki, które muszą być spełnione, aby dany wyjątek został obsłużony.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span> <span class="nf">when</span> <span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="s">"specjalny"</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Złapano wyjątek zawierający 'specjalny'."</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="obsługa-przepełnienia">Obsługa przepełnienia*<a class="anchorjs-link " href="#obsługa-przepełnienia" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p>W C# <code class="language-plaintext highlighter-rouge">checked</code> i <code class="language-plaintext highlighter-rouge">unchecked</code>
+ kontrolują przepełnienie arytmetyczne dla operacji na liczbach 
+całkowitych (int, long, short, byte, itp.). Przepełnienie występuje, gdy
+ wynik operacji przekracza zakres typu danych. Przykład dla int (-2 147 
+483 648 do 2 147 483 647). <strong>Domyślnie dla operacji arytmetycznych wykorzystywane jest unchecked.</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">checked</code> – Włącza sprawdzanie przepełnienia</p>
+
+<p><code class="language-plaintext highlighter-rouge">unchecked</code> – Wyłącza sprawdzanie przepełnienia</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">checked</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="n">max</span> <span class="p">+</span> <span class="m">1</span><span class="p">;</span> <span class="c1">// Powoduje wyjątek OverflowException</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">unchecked</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="n">max</span> <span class="p">+</span> <span class="m">1</span><span class="p">;</span> <span class="c1">// Brak wyjątku! Wynik: -2147483648</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="zadania">Zadania<a class="anchorjs-link " href="#zadania" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="zadanie-1">Zadanie 1<a class="anchorjs-link " href="#zadanie-1" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<blockquote>
+  <p>Napisz program, który prosi użytkownika o wprowadzenie dwóch liczb 
+całkowitych. Następnie program wykonuje dzielenie jednej liczby przez 
+drugą i wyświetla wynik. Jakie wyjątki mogą wystapić w czasie działania 
+programu? Obsłuż wystepujące wyjątki wyświetlając stosowne komunikaty w 
+konsoli oraz dajac użytkownikowi mozliwość poprawy błędów.</p>
+</blockquote>
+
+<details>
+
+  <p>-Jeśli użytkownik poda 0 jako dzielnik, program wyświetli komunikat o błędzie.</p>
+
+  <p>-Jeśli użytkownik wprowadzi coś, co nie jest liczbą całkowitą, program wyświetli komunikat o błędzie.</p>
+
+</details>
+
+<h3 id="zadanie-2">Zadanie 2<a class="anchorjs-link " href="#zadanie-2" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<blockquote>
+  <p>Stwórz własny wyjątek <code class="language-plaintext highlighter-rouge">NegativeNumberException</code>, który będzie rzucany, gdy użytkownik poda liczbę ujemną. <code class="language-plaintext highlighter-rouge">InvalidEmailException</code>, który będzie wyrzucany gdy wpisany email jest prawidłowy. <code class="language-plaintext highlighter-rouge">InvalidPhoneNumberException</code>,
+ który będzie rzucany gdy numer telefonu nie jest w formacie 000-000-000
+ lub innym prawidłowym. Program powinien demonstrować obsługę 
+stworoznych wyjątków, przypadki brzegowe gdy dane wyjątki wystepują.</p>
+</blockquote>
+
+<h2 id="zadanie-3">Zadanie 3<a class="anchorjs-link " href="#zadanie-3" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<blockquote>
+  <p>Dana jest metoda symująca działanie żądań http zwracająca wyjątki HttpRequestException:</p>
+
+  <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">HttpResponseMessage</span> <span class="nf">SimulateHttpRequest</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">url</span> <span class="p">==</span> <span class="s">"/moved"</span><span class="p">)</span>
+       <span class="p">{</span>
+           <span class="c1">// Zwraca kod 301 - Moved Permanently (przekierowanie)</span>
+           <span class="k">throw</span> <span class="k">new</span> <span class="nf">HttpRequestException</span><span class="p">(</span><span class="s">"301 - Moved Permanently"</span><span class="p">);</span>
+       <span class="p">}</span>
+       <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">url</span> <span class="p">==</span> <span class="s">"/notfound"</span><span class="p">)</span>
+       <span class="p">{</span>
+           <span class="c1">// Zwraca kod 404 - Not Found (nie znaleziono zasobu)</span>
+           <span class="k">throw</span> <span class="k">new</span>  <span class="nf">HttpRequestException</span><span class="p">(</span><span class="s">"404 - Not Found"</span><span class="p">);</span>
+       <span class="p">}</span>
+       <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">url</span> <span class="p">==</span> <span class="s">"/ok"</span><span class="p">)</span>
+       <span class="p">{</span>
+           <span class="c1">// Zwraca kod 200 - OK (żądanie udane)</span>
+           <span class="k">return</span> <span class="k">new</span> <span class="nf">HttpResponseMessage</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">OK</span><span class="p">);</span>
+       <span class="p">}</span>
+       <span class="k">else</span>
+       <span class="p">{</span>
+           <span class="c1">// Zwraca kod 500 - Internal Server Error (błąd serwera)</span>
+           <span class="k">throw</span> <span class="k">new</span> <span class="nf">HttpRequestException</span><span class="p">(</span><span class="s">"500 - Internal Server Error"</span><span class="p">);</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+</code></pre></div>  </div>
+
+  <p>Zasymuluj zapytania pod odpowiednie endpointy oraz obsłuż wyjątki (301, 404, 500) w zależności od kodu błędu:
+301 wyświetl w konsoli - Błąd: Przekierowanie (301) - Zasób został przeniesiony.
+404 wyświetl w konsoli - Błąd: Zasób nie znaleziony (404).
+500 wyświetl w konsoli - Błąd: Błąd serwera (500). Proszę spróbować ponownie później.</p>
+</blockquote>
+
+<details>
+
+  <p>Wykorzystaj słówko kluczowe <code class="language-plaintext highlighter-rouge">when</code>.</p>
+
+</details>
+
+<script>
+    function saveToLocalStorage(event) {
+        const element = event.target;
+        if (element.id) {  // Only save elements with an ID
+            localStorage.setItem(element.id, element.value);
+        }
+    }
+
+    function loadFromLocalStorage() {
+        document.querySelectorAll("input, textarea").forEach(element => {
+            if (element.id && localStorage.getItem(element.id)) {
+                element.value = localStorage.getItem(element.id);
+            }
+            element.addEventListener("input", saveToLocalStorage);
+        });
+    }
+
+    window.addEventListener("DOMContentLoaded", loadFromLocalStorage);
+</script>
+
+
+
+      
+    </div>
+    <script src="Obs%C5%82uga%20wyj%C4%85tk%C3%B3w%20w%20j%C4%99zyku%20C%23.%20_%20cs_pliki/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  
+
+</body></html>
